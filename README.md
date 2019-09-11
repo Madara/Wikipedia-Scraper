@@ -1,6 +1,6 @@
 # Wikipedia-Scraper
 
-A Python Wikipedia Scraper using BeautifulSoup4! Wikipedia-Scraper automatically scrapes the text and removes all of those unnecessary "[x]" within it.
+A Python Wikipedia Scraper using BeautifulSoup4! Wikipedia-Scraper automatically scrapes all text from a specific Wikipedia page and removes all of those unnecessary "[x]" within it.
 
 ## Installation
 
