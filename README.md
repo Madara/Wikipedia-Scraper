@@ -36,6 +36,7 @@ pip install wikipedia
 * Spanish
 * Italian
 * Swedish
+* Portuguese
 
 ## To Do
 
