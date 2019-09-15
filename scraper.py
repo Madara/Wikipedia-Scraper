@@ -61,8 +61,8 @@ def create_text_file():
         for paragraph in document.find_all('p'):
             # Gets all text within all of the <p> tags.
             text = (paragraph.get_text())
-            # Removes all "[x]" items from the text. (e.g. [1], [2] etc.)
-            filtered_text = re.sub("\[(.*)\]", "", text)
+            # Removes all "[x]" items from the text. (e.g. [1], [2] etc.) and replace with a newline
+            filtered_text = re.sub("\[(.*)\]", "\n", text)
             # Writes the final version of the text to the text file.
             file.write(filtered_text)
 
