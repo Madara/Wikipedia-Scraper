@@ -42,7 +42,7 @@ def create_text_file():
     :return: None
     """
     try:
-        folder = (f"{topic}".capitalize() + " Wikipedia")
+        folder = f"{topic.capitalize()} - Wikipedia"
         os.mkdir(folder)
     except FileExistsError:
         print("You have already scraped that page, please try something else.")
@@ -50,9 +50,9 @@ def create_text_file():
     page = get_page()
 
     with io.open((folder + "/" + f"{topic}_scrape.txt"), "w", encoding="utf-8") as file:
-        file.write(f"{topic}".upper() + " WIKIPEDIA: \n")
+        file.write(f"{topic.upper()} - WIKIPEDIA: \n")
         file.write("------------------------------------------------------------\n")
-        file.write("Wikipedia Link: " + page.url)
+        file.write(f"Wikipedia Link: {page.url}")
         file.write("\n------------------------------------------------------------\n")
 
         # Parses to HTML
@@ -66,11 +66,11 @@ def create_text_file():
             # Writes the final version of the text to the text file.
             file.write(filtered_text)
 
+        print("Scrape Successful!")
+
 
 def main():
     create_text_file()
-
-    print("Scrape Successful!")
 
 
 if __name__ == "__main__":
