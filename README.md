@@ -17,7 +17,7 @@ In the console of your choice, run:
 
 ```bash
 cd /path/to/directory
-python scraper.py
+python3 scraper.py
 ```
 Or if you are on Windows:
 ```bash

@@ -54,8 +54,8 @@ def create_text_file(page):
 
             for paragraph in document.find_all('p'):
                 text = (paragraph.get_text())
-                # Removes all "[x]" items from the text. (e.g. [1], [2] etc.), replacing them with a newline.
-                filtered_text = re.sub("\[(.*)\]", "\n", text)
+                # Removes all "[x]" items from the text. (e.g. [1], [2] etc.), replacing with platform agnostic newline
+                filtered_text = re.sub("\[(.*)\]", os.linesep, text)
                 # Writes the final version of the text to the text file.
                 file.write(filtered_text)
 
