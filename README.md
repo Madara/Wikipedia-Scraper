@@ -13,22 +13,23 @@ In the console of your choice, run:
 ```bash
 cd C:\Users\JohnDoe\Desktop\scraper
 python scraper.py
-````
-## Requirements
-#### BeautifulSoup4
-```bash
-pip install bs4
-````
-#### Requests
-```bash
-pip install requests
-````
-#### Wikipedia
-```bash
-pip install wikipedia
-````
+```
 
-## Supported Languages
+## Requirements
+
+**BeautifulSoup4**
+
+**Requests**
+
+**Wikipedia**
+
+*You can install these requirements by running:*
+
+```python
+pip install -r requirements.txt
+```
+
+#### Supported Languages
 
 * English
 * Dutch
@@ -46,9 +47,11 @@ pip install wikipedia
 4. Tables and Images
 
 ## Contributing
+
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 Please make sure to update tests as appropriate.
 
 ## License
+
 [MIT](https://choosealicense.com/licenses/mit/)
