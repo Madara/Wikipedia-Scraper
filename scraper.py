@@ -30,12 +30,12 @@ def get_page():
     response = requests.get(topic_url)
     try:
         assert response.ok
+        return response
     except AssertionError:
         print("Assertion Error!")
-    return response
 
 
-def create_text_file():
+def create_text_file(page):
     """
     Checks whether a folder and file exist for the scraped data.
     If not, create them. If yes, let the user know that the data's been scraped.
@@ -44,33 +44,33 @@ def create_text_file():
     try:
         folder = f"{topic.capitalize()} - Wikipedia"
         os.mkdir(folder)
+
+        with io.open((folder + "/" + f"{topic}_scrape.txt"), "w", encoding="utf-8") as file:
+            file.write(f"{topic.upper()} - WIKIPEDIA: \n")
+            file.write("------------------------------------------------------------\n")
+            file.write(f"Wikipedia Link: {page.url}")
+            file.write("\n------------------------------------------------------------\n")
+
+            # Parses to HTML
+            document = BeautifulSoup(page.text, 'html.parser')
+
+            for paragraph in document.find_all('p'):
+                # Gets all text within all of the <p> tags.
+                text = (paragraph.get_text())
+                # Removes all "[x]" items from the text. (e.g. [1], [2] etc.) and replace with a newline
+                filtered_text = re.sub("\[(.*)\]", "\n", text)
+                # Writes the final version of the text to the text file.
+                file.write(filtered_text)
+
+            print("Scrape Successful!")
+
     except FileExistsError:
         print("You have already scraped that page, please try something else.")
 
-    page = get_page()
-
-    with io.open((folder + "/" + f"{topic}_scrape.txt"), "w", encoding="utf-8") as file:
-        file.write(f"{topic.upper()} - WIKIPEDIA: \n")
-        file.write("------------------------------------------------------------\n")
-        file.write(f"Wikipedia Link: {page.url}")
-        file.write("\n------------------------------------------------------------\n")
-
-        # Parses to HTML
-        document = BeautifulSoup(page.text, 'html.parser')
-
-        for paragraph in document.find_all('p'):
-            # Gets all text within all of the <p> tags.
-            text = (paragraph.get_text())
-            # Removes all "[x]" items from the text. (e.g. [1], [2] etc.) and replace with a newline
-            filtered_text = re.sub("\[(.*)\]", "\n", text)
-            # Writes the final version of the text to the text file.
-            file.write(filtered_text)
-
-        print("Scrape Successful!")
-
 
 def main():
-    create_text_file()
+    page = get_page()
+    create_text_file(page)
 
 
 if __name__ == "__main__":
