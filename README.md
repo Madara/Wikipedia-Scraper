@@ -4,14 +4,24 @@ A Python Wikipedia Scraper using BeautifulSoup4! Wikipedia-Scraper automatically
 
 ## Installation
 
-Create a Folder and place ```scraper.py``` inside.
+Download a .zip file of the repository and extract it where you would like to keep the files. 
+
+Install the requirements by running:
+```bash
+pip install -r requirements.txt
+```
 
 ## Usage
 
 In the console of your choice, run:
 
 ```bash
-cd C:\Users\JohnDoe\Desktop\scraper
+cd /path/to/directory
+python scraper.py
+```
+Or if you are on Windows:
+```bash
+cd C:\Users\Path\To\Directory
 python scraper.py
 ```
 
@@ -25,7 +35,7 @@ python scraper.py
 
 *You can install these requirements by running:*
 
-```python
+```bash
 pip install -r requirements.txt
 ```
 
