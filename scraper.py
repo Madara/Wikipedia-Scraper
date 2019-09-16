@@ -1,8 +1,8 @@
 import io
 import os
 import re
+import csv  # unused at the moment
 
-import csv
 import requests
 import wikipedia
 from bs4 import BeautifulSoup
@@ -22,12 +22,9 @@ def get_page():
     Get Wikipedia page based on the topic and language that was inputted.
     :return: requests.models.Response
     """
-    topic_page = wikipedia.page(topic)
-    wikipedia.search(topic_page)
-    topic_url = topic_page.url
-    chosen_lang = lang.get(language)
-    topic_url = re.sub("en", chosen_lang, topic_url)
+    topic_url = re.sub("en", lang.get(language), wikipedia.page(topic).url)
     response = requests.get(topic_url)
+
     try:
         assert response.ok
         return response
@@ -39,6 +36,7 @@ def create_text_file(page):
     """
     Checks whether a folder and file exist for the scraped data.
     If not, create them. If yes, let the user know that the data's been scraped.
+    Print a message indicating that the scrape was successful, if so
     :return: None
     """
     try:
@@ -55,9 +53,8 @@ def create_text_file(page):
             document = BeautifulSoup(page.text, 'html.parser')
 
             for paragraph in document.find_all('p'):
-                # Gets all text within all of the <p> tags.
                 text = (paragraph.get_text())
-                # Removes all "[x]" items from the text. (e.g. [1], [2] etc.) and replace with a newline
+                # Removes all "[x]" items from the text. (e.g. [1], [2] etc.), replacing them with a newline.
                 filtered_text = re.sub("\[(.*)\]", "\n", text)
                 # Writes the final version of the text to the text file.
                 file.write(filtered_text)
